@@ -1,0 +1,100 @@
+12/18/2024
+
+1. make an operation based math game python terminal. 
+
+import random
+
+def generate_question():
+    # Randomly choose an operation
+    operation = random.choice(["+", "-", "*"])
+
+    # Generate two random numbers
+    num1 = random.randint(1, 10)
+    num2 = random.randint(1, 10)
+
+    # Create the question based on the operation
+    if operation == "+":
+        answer = num1 + num2
+    elif operation == "-":
+        answer = num1 - num2
+    else:
+        answer = num1 * num2
+
+    # Return the question and the correct answer
+    return f"{num1} {operation} {num2} = ?", answer
+
+def math_game():
+    print("Welcome to the Math Game!")
+    print("Solve the math questions. Type 'exit' to quit the game.")
+    
+    score = 0  # To track the player's score
+
+    while True:
+        # Generate a math question
+        question, correct_answer = generate_question()
+        
+        # Ask the user the question
+        print(question)
+        
+        # Get the user's answer
+        user_input = input("Your answer: ")
+
+        # Check if the user wants to exit
+        if user_input.lower() == 'exit':
+            print("Thanks for playing!")
+            break
+
+        # Check if the input is a valid number
+        if user_input.isdigit():
+            user_answer = int(user_input)
+
+            # Check if the user's answer is correct
+            if user_answer == correct_answer:
+                score += 1
+                print("Correct! Your score is:", score)
+            else:
+                print("Incorrect! The correct answer is:", correct_answer)
+        else:
+            print("Please enter a valid number or 'exit' to quit.")
+
+# Start the game
+math_game()
+
+2. make rock paper scissors python terminal
+
+import random
+
+def get_user_choice():
+    print("Enter your choice: Rock, Paper, or Scissors")
+    user_choice = input().lower()
+    while user_choice not in ['rock', 'paper', 'scissors']:
+        print("Invalid choice! Please enter Rock, Paper, or Scissors.")
+        user_choice = input().lower()
+    return user_choice
+
+def get_computer_choice():
+    choices = ['rock', 'paper', 'scissors']
+    return random.choice(choices)
+
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == 'rock' and computer_choice == 'scissors') or \
+         (user_choice == 'scissors' and computer_choice == 'paper') or \
+         (user_choice == 'paper' and computer_choice == 'rock'):
+        return "You win!"
+    else:
+        return "Computer wins!"
+
+def play_game():
+    print("Welcome to Rock, Paper, Scissors!")
+    user_choice = get_user_choice()
+    computer_choice = get_computer_choice()
+    print(f"Computer chose: {computer_choice}")
+    result = determine_winner(user_choice, computer_choice)
+    print(result)
+
+if __name__ == "__main__":
+    play_game()
+
+3. 
