@@ -7,8 +7,8 @@ class Player:
         self.attack = attack
         self.inventory = inventory
         self.stamina = stamina
-        self.currency = currency  # Player's currency (gold)
-    
+        self.currency = currency 
+
     def take_damage(self, damage):
         self.health -= damage
         print(f"{self.name} takes {damage} damage! Health is now {self.health}.")
@@ -16,7 +16,7 @@ class Player:
             print(f"{self.name} has been defeated!")
 
     def attack_enemy(self, enemy, attack_type):
-        if attack_type == 1:  # Light attack
+        if attack_type == 1: 
             damage = 5
             if self.stamina >= 10:
                 enemy.take_damage(damage)
@@ -24,7 +24,7 @@ class Player:
                 print(f"{self.name} attacks with a light attack! {enemy.name} takes {damage} damage.")
             else:
                 print(f"{self.name} doesn't have enough stamina to attack.")
-        elif attack_type == 2:  # Heavy attack
+        elif attack_type == 2:  
             damage = 10
             if self.stamina >= 20:
                 enemy.take_damage(damage)
@@ -96,7 +96,7 @@ class Enemies:
         self.attack = attack
         self.health = health
         self.stamina = stamina
-        self.currency_reward = currency_reward  # Currency reward for defeating the enemy
+        self.currency_reward = currency_reward 
 
     def take_damage(self, damage):
         self.health -= damage
@@ -105,11 +105,11 @@ class Enemies:
 
 class Slime(Enemies):
     def __init__(self, name="Slime"):
-        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10)  # 10 gold for defeating Slime
+        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10) 
 
 class BigSlime(Enemies):
     def __init__(self, name="Big Slime"):
-        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20)  # 20 gold for defeating Big Slime
+        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20)  
 
 class Item:
     def __init__(self, name, effect, price):
@@ -129,13 +129,13 @@ class HealthPotion(Item):
 class Merchant:
     def __init__(self):
         self.items_for_sale = [HealthPotion()]
-    
+
     def show_items(self):
         print("Welcome to the merchant!")
         print("Items available for sale:")
         for index, item in enumerate(self.items_for_sale, 1):
             print(f"{index}. {item.name} - {item.price} gold")
-    
+
     def sell_item(self, player):
         self.show_items()
         choice = input("Enter the number of the item you'd like to buy, or '0' to exit: ")
@@ -154,7 +154,7 @@ class Merchant:
 
 def drop_item(player):
     item_drop_chance = random.randint(1, 100)
-    if item_drop_chance > 70:
+    if item_drop_chance > 70:  
         item = HealthPotion()
         player.inventory.append(item)
         print(f"{player.name} found a {item.name}!")
@@ -233,7 +233,7 @@ def start_game():
 
             if enemy.health <= 0:
                 print(f"{enemy.name} has been defeated! You win!")
-                player.currency += enemy.currency_reward  # Add currency reward to player
+                player.currency += enemy.currency_reward 
                 print(f"{player.name} gains {enemy.currency_reward} gold!")
                 drop_item(player)
                 break

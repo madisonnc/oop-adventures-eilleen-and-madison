@@ -7,7 +7,7 @@ class Player:
         self.attack = attack
         self.inventory = inventory
         self.stamina = stamina
-        self.currency = currency  # Currency added for purchasing items
+        self.currency = currency 
     
     def take_damage(self, damage):
         self.health -= damage
@@ -76,7 +76,7 @@ class Player:
             if item_choice >= 0 and item_choice < len(self.inventory):
                 item = self.inventory[item_choice]
                 item.use(self)
-                self.inventory.remove(item)  # Remove the item after use
+                self.inventory.remove(item) 
             else:
                 print("Invalid choice!")
         except ValueError:
@@ -113,8 +113,8 @@ class BigSlime(Enemies):
 class Item:
     def __init__(self, name, effect, price):
         self.name = name
-        self.effect = effect  # Effect could be a function or a simple value to modify health/stamina
-        self.price = price  # Item price for the merchant
+        self.effect = effect 
+        self.price = price 
 
 class HealthPotion(Item):
     def __init__(self):
@@ -127,7 +127,6 @@ class HealthPotion(Item):
 
 class Merchant:
     def __init__(self):
-        # The merchant sells a list of items
         self.items_for_sale = [HealthPotion()]
     
     def show_items(self):
@@ -154,8 +153,8 @@ class Merchant:
 
 def drop_item(player):
     item_drop_chance = random.randint(1, 100)
-    if item_drop_chance > 70:  # 30% chance to drop an item
-        item = HealthPotion()  # You could make this random too
+    if item_drop_chance > 70:  
+        item = HealthPotion()  
         player.inventory.append(item)
         print(f"{player.name} found a {item.name}!")
 
@@ -190,10 +189,10 @@ def start_game():
 
         if choice == "merchant":
             merchant = Merchant()
-            merchant.sell_item(player)  # Visit the merchant and buy items
+            merchant.sell_item(player)  
             continue
 
-        enemy = choice  # If not merchant, it's an enemy
+        enemy = choice  
 
         print(f"\nA wild {enemy.name} appears!\n")
 
@@ -233,7 +232,7 @@ def start_game():
             
             if enemy.health <= 0:
                 print(f"{enemy.name} has been defeated! You win!")
-                drop_item(player)  # Let the player pick up an item after victory
+                drop_item(player) 
                 break
 
             if enemy.health > 0:
