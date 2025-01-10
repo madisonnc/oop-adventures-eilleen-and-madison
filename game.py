@@ -1,47 +1,35 @@
 import random
-from entities import Player, Enemies, Slime, BigSlime
-
-def choose_enemy():
-    print("\nChoose an enemy to fight:")
-    print("1. Slime")
-    print("2. Big Slime")
-    print("3. Exit (quit the game)")
-
-    choice = input("Enter the number of your choice: ")
-
-    if choice == "1":
-        return Slime()
-    elif choice == "2":
-        return BigSlime()
-    elif choice == "3":
-        print("You chose to exit the game.")
-        exit()  
-    else:
-        print("Invalid choice. Please choose again.")
-        return choose_enemy()  
+from entities import Player, Slime, BigSlime, HealthPotion, Merchant
 
 def start_game():
     player_name = input("What's your name? ")
-    player = Player(name=player_name, health=100, attack=5, inventory=[], stamina=50)
+    player = Player(name=player_name, health=100, attack=5, inventory=[], stamina=50, currency=50)
 
     while player.health > 0:
-        enemy = choose_enemy()  
+        choice = choose_enemy()
+
+        if choice == "merchant":
+            merchant = Merchant()
+            merchant.sell_item(player)
+            continue
+
+        enemy = choice
 
         print(f"\nA wild {enemy.name} appears!\n")
 
         while player.health > 0 and enemy.health > 0:
             print("\n------------------")
             print(f"{player.name}'s turn")
-            print(f"Health: {player.health}, Stamina: {player.stamina}")
+            print(f"Health: {player.health}, Stamina: {player.stamina}, Gold: {player.currency}")
             print(f"Enemy: {enemy.name} | Health: {enemy.health}")
 
-            print("\nWhat would you like to do?")
             print("1. Attack (Light Attack - 10 Stamina)")
             print("2. Attack (Heavy Attack - 20 Stamina)")
             print("3. Heal (10 Health - 10 Stamina)")
             print("4. Regenerate Stamina (Costs 10 Stamina to regain 20 Stamina)")
             print("5. Escape (Attempt to escape from the battle)")
             print("6. Do Nothing")
+            print("7. Use Inventory")
 
             action = input("Enter the number of your choice: ")
 
@@ -55,32 +43,36 @@ def start_game():
                 player.regenerate_stamina()
             elif action == "5":
                 if player.attempt_escape(enemy):
-                    break  
+                    break
             elif action == "6":
                 print(f"{player.name} does nothing this turn.")
+            elif action == "7":
+                player.use_inventory_item()
             else:
                 print("Invalid option. Please choose again.")
-            
+
             if enemy.health <= 0:
                 print(f"{enemy.name} has been defeated! You win!")
+                player.currency += enemy.currency_reward  
+                print(f"{player.name} gains {enemy.currency_reward} gold!")
+                drop_item(player)
                 break
 
             if enemy.health > 0:
-                enemy_action = random.choice([1, 2, 3]) 
-                if enemy_action == 1: 
+                enemy_action = random.choice([1, 2, 3])
+                if enemy_action == 1:
                     damage = random.randint(5, 10)
                     print(f"{enemy.name} attacks! {player.name} takes {damage} damage.")
                     player.take_damage(damage)
-                elif enemy_action == 2:  
+                elif enemy_action == 2:
                     print(f"{enemy.name} does nothing this turn.")
-                elif enemy_action == 3:  
+                elif enemy_action == 3:
                     heal = random.randint(5, 10)
                     enemy.health += heal
                     print(f"{enemy.name} heals for {heal} health.")
-        
+
         if player.health <= 0:
             print(f"{player.name} has been defeated! Game over.")
             break
 
-if __name__ == "__main__":
-    start_game()
+start_game()
