@@ -106,13 +106,18 @@ class Player:
             print(f"{self.name} doesn't have enough gold to buy {item.name}.")
 
 class Enemies:
-    def __init__(self, name, attack, health, stamina, currency_reward):
+    def __init__(self, name, attack, health, stamina, currency_reward, ascii_art):
         self.name = name
         self.attack = attack
         self.health = health
         self.stamina = stamina
         self.currency_reward = currency_reward
+        self.ascii_art = ascii_art  
 
+    def display(self):
+        print(self.ascii_art)  
+        print(f"{self.name} has appeared with {self.health} health and {self.attack} attack!")
+    
     def take_damage(self, damage):
         self.health -= damage
         print(f"{self.name} takes {damage} damage! Health is now {self.health}.")
@@ -120,11 +125,28 @@ class Enemies:
 
 class Slime(Enemies):
     def __init__(self, name="Slime"):
-        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10)
+        slime_art = """
+             _______
+            /       \\
+         ૮ /  ᵔ ᵕ ᵔ  \\ა
+          |           |  
+          |   \\___/   |
+           \\_________/
+        """
+        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10, ascii_art=slime_art)
 
 class BigSlime(Enemies):
     def __init__(self, name="Big Slime"):
-        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20)
+        bigslime_art = """
+           _________
+          /         \\
+         /  ᗜ    ᗜ  \\
+        |     ---     |  
+        |   /     \\   |  
+        |   \\_____/   | و
+         \\___________/
+        """
+        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20, ascii_art=bigslime_art)
 
 class Item:
     def __init__(self, name, effect, price):
@@ -215,6 +237,7 @@ def choose_enemy():
         return choose_enemy()
 
 def handle_battle(player, enemy):
+    enemy.display()
     while player.health > 0 and enemy.health > 0:
         display_battle_info(player, enemy)
         handle_player_turn(player, enemy)
