@@ -1,7 +1,7 @@
 import random
 
 class PowerUp:
-    def __init__(self, chance=1.0): 
+    def __init__(self, chance=0.2): 
         self.chance = chance
 
     def activate(self, damage, player):
