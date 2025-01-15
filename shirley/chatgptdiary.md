@@ -3,18 +3,15 @@
 
 # ChatGPT Coding Diary
 
-## Project Name: _[Insert project name]_
+## Name: Shirley Jiang
 
-### Date: _[Insert date]_
+### Date: 01/14/25
 
 ---
 
 ## 1. **Task/Problem Description**
 
-Briefly describe the problem you're trying to solve or the task you're working on.
-
-Example:
-> I need to write a program that sorts a list of integers in ascending order.
+> I want to make a function where the player gets an small chance to get a power up to deal double damage. How can I develop my classes further.
 
 ---
 
@@ -23,31 +20,34 @@ Example:
 Describe the initial approach you took to solving the problem. If you started writing code, include it here.
 
 ```python
-# Example: Initial sorting function
-def sort_numbers(numbers):
-    return sorted(numbers)
+import random
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.health = health
+
+class PowerUp:
+    def __init__(self, chance=0.2): 
+        self.chance = chance
+
+    def activate:
+
 ```
 
-- What was your plan for solving the problem?
-- Did you have any initial thoughts or strategies before using ChatGPT?
+> My original plan was to create a class for the player and another class for the power-up. Then I can create a function where it activates. 
+
+> Before using ChatGPT, I created a class for the player and powerup, however I don't know how to apply the powerup.
 
 ---
 
 ## 3. **Interaction with ChatGPT**
 
 ### Questions/Requests to ChatGPT
-Write down the questions or requests you made to ChatGPT. 
-Also include what code from ChatGPT you are unsure of and craft a question that asks for further clarification. 
- For example:
+> How do make an function for the powerup to activate?
 
-- "How do I reverse a list in Python?"
-- "Can you suggest a more efficient way to sort a list?"
-- Why did ChatGPT opt for create element when my teacher suggested insertAdjacentHTML?
+> What does random.random() do?
 
-```text
-# Example prompt to ChatGPT:
-How can I optimize this sorting function for large datasets?
-```
+> How can I create art in terminal?
 
 ---
 
@@ -56,26 +56,49 @@ How can I optimize this sorting function for large datasets?
 Record the code or suggestions ChatGPT provided. Include any changes or improvements ChatGPT suggested and how it influenced your approach.
 
 ```python
-# ChatGPT suggested using a custom sorting algorithm to improve efficiency
-def optimized_sort(numbers):
-    # Implementation of a more efficient sorting algorithm
-    pass
+import random
+
+class Player:
+    def __init__(self, name, health=100):
+        self.name = name
+        self.health = health
+
+
+class PowerUp:
+    def __init__(self, chance=0.2):
+        self.chance = chance
+
+    def activate(self):
+        if random.random() < self.chance:
+            return True
+        else:
+            return False
+
+if power_up.activate():
+    print(f"{player.name} activated a power-up!")
+else:
+    print(f"{player.name} did not activate the power-up.")
 ```
 
-- What was ChatGPT's solution or suggestion?
-- How did it differ from your original approach?
+```python
+# One option is to create ASCII art to represent your player. ASCII art uses characters (like letters, numbers, and symbols) to form pictures.
+
+# Here’s an example of simple ASCII art for a player:
+
+player_art = """
+  O
+ /|\\
+ / \\
+"""
+print(player_art)
+```
+
+- ChatGPT suggested to use random.random(), which generates a random float between 0 and 1. If this float is less than the chance (0.2) the powerup is activated.
+- It differed from my original code because I did not consider using if and else.
 
 ---
 
 ## 5. **Reflection on Changes**
-
-Reflect on the changes made to your code after ChatGPT's suggestions. Answer the following questions:
-
-- Why do you think ChatGPT's suggestions are helpful or relevant?
-- Did the suggestions improve your code? How?
-- Did you understand why the changes were made, or are you still uncertain about some parts?
-
-Example:
-> ChatGPT recommended using a more efficient sorting algorithm like quicksort. I think this will improve the runtime for large inputs, but I need to review the algorithm's complexity to fully understand its advantages.
+> I believe ChatGPT's suggestions are helpful and relevant because it provided an easy solution to my original problem. Yes, the suggestions improved my code because now my player has an 20% to activate a powerup. ChatGPT suggested how I can use randomized floats and if else to apply my powerup on the player. Yes, i understand why the changes were made.
 
 ---
