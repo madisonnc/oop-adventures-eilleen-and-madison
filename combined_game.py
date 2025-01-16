@@ -116,6 +116,9 @@ class Enemies:
         print(f"{self.name} takes {damage} damage! Health is now {self.health}.")
         return damage
 
+    def display(self):
+        print(self.ascii_art)  
+
 class Slime(Enemies):
     def __init__(self, name="Slime"):
         slime_art = """
@@ -230,6 +233,7 @@ def choose_enemy():
         return choose_enemy()
 
 def handle_battle(player, enemy):
+    enemy.display()
     while player.health > 0 and enemy.health > 0:
         display_battle_info(player, enemy)
         handle_player_turn(player, enemy)
