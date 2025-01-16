@@ -1,5 +1,16 @@
 import random
 
+class PowerUp:
+    def __init__(self, chance=0.2): 
+        self.chance = chance
+
+    def activate(self, damage, player):
+        if random.random() < self.chance:
+            print(f"Powerup activated! {player.name} attacks with double damage!")
+            return damage * 2
+        else:
+            return damage
+
 class Player:
     def __init__(self, name, health, attack, inventory, stamina, currency):
         self.name = name
@@ -8,6 +19,7 @@ class Player:
         self.inventory = inventory
         self.stamina = stamina
         self.currency = currency
+        self.power_up = PowerUp()
 
     def take_damage(self, damage):
         self.health -= damage
@@ -91,12 +103,13 @@ class Player:
             print(f"{self.name} doesn't have enough gold to buy {item.name}.")
 
 class Enemies:
-    def __init__(self, name, attack, health, stamina, currency_reward):
+    def __init__(self, name, attack, health, stamina, currency_reward, ascii_art):
         self.name = name
         self.attack = attack
         self.health = health
         self.stamina = stamina
         self.currency_reward = currency_reward
+        self.ascii_art = ascii_art  
 
     def take_damage(self, damage):
         self.health -= damage
@@ -105,11 +118,28 @@ class Enemies:
 
 class Slime(Enemies):
     def __init__(self, name="Slime"):
-        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10)
+        slime_art = """
+             _______
+            /       \\
+         ૮ /  ᵔ ᵕ ᵔ  \\ა
+          |           |  
+          |   \\___/   |
+           \\_________/
+        """
+        super().__init__(name, attack=5, health=40, stamina=40, currency_reward=10, ascii_art=slime_art)
 
 class BigSlime(Enemies):
     def __init__(self, name="Big Slime"):
-        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20)
+        bigslime_art = """
+           _________
+          /         \\
+         /  ᗜ    ᗜ  \\
+        |     ---     |  
+        |   /     \\   |  
+        |   \\_____/   | و
+         \\___________/
+        """
+        super().__init__(name, attack=10, health=69, stamina=69, currency_reward=20, ascii_art=slime_art)
 
 class Item:
     def __init__(self, name, effect, price):
